@@ -3,18 +3,21 @@
 ### Ativação Manual
 
 - Ativar o recusdo de **Subsistema do Windows para Linux** na tela de Recursos do Windows
-  - ``shell
+  ```shell
     dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-    ``
-- Ativar o recurso de **Hyper-V** na tela de Recursos do Windows
-  - ``shell
-      dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-    ``
+  ```
 - Ativar o Recurso de **Plataforma de Máquina Virtual** na tela de Recursos do Windows
-  - ``sehll
-      dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-    ``
+  ```sehll
+    dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+  ```
+- Ativar o recurso de **Hyper-V** na tela de Recursos do Windows
+  ```shell
+    dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
+  ```
 - Seguir as Etapas descritas no site da Microsoft, pulando as etapas das ativações
+- Pós a ativação dos recursos, reinicie a máquina: `shutdown -r -t 0`
+- Faça o update do WSL: `wsl.exe --update`
+- Configure como default a versão 2: `wsl --set-default-version 2`
 
 ### Instalação do Arch Linux
 
