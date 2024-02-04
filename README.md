@@ -1,10 +1,5 @@
 # Instalar WSL2 e Configurar o Arch Linux
 
-### Debloat Windows 10 e 11
-
-- Debloat é um script criado para remover itens desnecessários que o Windows instala e executa por padrão
-- Script PowerShell: `irm christitus.com/win | iex`
-
 ### Ativação Manual
 
 - Ativar o recusdo de **Subsistema do Windows para Linux** na tela de Recursos do Windows
