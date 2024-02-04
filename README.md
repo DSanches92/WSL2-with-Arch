@@ -3,8 +3,17 @@
 ### Ativação Manual
 
 - Ativar o recusdo de **Subsistema do Windows para Linux** na tela de Recursos do Windows
+  - ``shell
+    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    ``
 - Ativar o recurso de **Hyper-V** na tela de Recursos do Windows
+  - ``shell
+      dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    ``
 - Ativar o Recurso de **Plataforma de Máquina Virtual** na tela de Recursos do Windows
+  - ``sehll
+      dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    ``
 - Seguir as Etapas descritas no site da Microsoft, pulando as etapas das ativações
 
 ### Instalação do Arch Linux
