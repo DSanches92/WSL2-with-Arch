@@ -16,7 +16,7 @@
   ```
 - Seguir as Etapas descritas no site da Microsoft, pulando as etapas das ativações
 - Pós a ativação dos recursos, reinicie a máquina: `shutdown -r -t 0`
-- Faça o update do WSL: `wsl.exe --update`
+- Faça o update do WSL: `wsl --update`
 - Configure como default a versão 2: `wsl --set-default-version 2`
 
 ### Instalação do Arch Linux
