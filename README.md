@@ -1,6 +1,7 @@
 # Instalar WSL2 e Configurar o Arch Linux
 
 ### Ativação Manual
+Para não instalar automáticamente o Ubuntu, assim, te permitindo instalar outra distro.
 
 - Ativar o recusdo de **Subsistema do Windows para Linux** na tela de Recursos do Windows
   ```shell
@@ -14,7 +15,6 @@
   ```shell
   dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
   ```
-- Seguir as Etapas descritas no site da Microsoft, pulando as etapas das ativações
 - Pós a ativação dos recursos, reinicie a máquina: `shutdown -r -t 0`
 - Faça o update do WSL: `wsl --update`
 - Configure como default a versão 2: `wsl --set-default-version 2`
