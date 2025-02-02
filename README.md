@@ -68,6 +68,41 @@ Para não instalar automáticamente o Ubuntu, assim, te permitindo instalar outr
 - Abra o Terminal no Arch e Realizar a configuração do Powerlevel10k
 - Caso, ao finalizar essa configuração, queira refazer. No terminal Arch: `p10k configure`
 
+### ZSH Auto Suggestions
+
+- No Terminal Arch: `git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions`
+- No Terminal Arch: `nano .zshrc`
+- Adicionar no arquivo para iniciar com o ZSH: `source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh`
+
+### ZSH History Database
+
+- No Terminal Arch: `git clone https://github.com/larkery/zsh-histdb ~/.zsh/zsh-histdb`
+- No Terminal Arch: `nano .zshrc`
+- Adicionar no arquivo: `source ~/.zsh/zsh-histdb/sqlite-history.zsh`
+- Adicionar no arquivo:
+  ```zsh
+  _zsh_autosuggest_strategy_histdb_top() {
+    local query="
+        select commands.argv from history
+        left join commands on history.command_id = commands.rowid
+        left join places on history.place_id = places.rowid
+        where commands.argv LIKE '$(sql_escape $1)%'
+        group by commands.argv, places.dir
+        order by places.dir != '$(sql_escape $PWD)', count(*) desc
+        limit 1 "
+
+    suggestion=$(_histdb_query "$query")
+  }
+
+  ZSH_AUTOSUGGEST_STRATEGY=histdb_top
+  ```
+
+### ZSH Syntax High Lighting
+
+- No Terminal Arch: `git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting`
+- No Terminal Arch: `nano .zshrc`
+- Adicionar no arquivo: `source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh`
+
 ### Instalando e Configurando o ASDF
 
 - ASDF é um gerenciador de versão para linguagens
