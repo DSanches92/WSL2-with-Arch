@@ -76,6 +76,7 @@ Para não instalar automáticamente o Ubuntu, assim, te permitindo instalar outr
 
 ### ZSH History Database
 
+- No Terminal Arch: `yay -S --noconfirm sqlite3`
 - No Terminal Arch: `git clone https://github.com/larkery/zsh-histdb ~/.zsh/zsh-histdb`
 - No Terminal Arch: `nano .zshrc`
 - Adicionar no arquivo: `source ~/.zsh/zsh-histdb/sqlite-history.zsh`
