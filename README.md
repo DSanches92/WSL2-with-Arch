@@ -2,6 +2,7 @@
 
 ### Ativação Manual
 Para não instalar automáticamente o Ubuntu, assim, te permitindo instalar outra distro.
+Executar no PowerShell como Administrador.
 
 - Ativar o recusdo de **Subsistema do Windows para Linux** na tela de Recursos do Windows
   ```shell
