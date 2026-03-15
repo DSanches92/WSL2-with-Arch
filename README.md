@@ -1,18 +1,28 @@
-# Instalar WSL2 e Configurar o Arch Linux
+# 🚀 WSL2 with Arch Linux: Fullstack Development Environment
+Repositório dedicado à minha configuração personalizada de desenvolvimento no **Windows 11 PRO**, utilizando **Arch Linux** via WSL2. Um ambiente otimizado para performance, focado em isolamento de ferramentas e produtividade.
 
-### Ativação Manual
-Para não instalar automáticamente o Ubuntu, assim, te permitindo instalar outra distro.
-Executar no PowerShell como Administrador.
+---
 
-- Ativar o recusdo de **Subsistema do Windows para Linux** na tela de Recursos do Windows
+## 💻 Hardware Specs
+- **CPU:** Ryzen 5 3600 (6C/12T)
+- **RAM:** 16GB
+- **OS:** Windows 11 PRO (Host) / Arch Linux (Guest)
+
+---
+
+## 🛠️ Guia de Instalação e Configuração
+### Ativação Recursos Windows
+Para não instalar automáticamente o Ubuntu, assim, te permitindo instalar outra distro. Executar no PowerShell como Administrador.
+
+- Ativar o recusdo de **Subsistema do Windows para Linux** na tela de Recursos do Windows:
   ```shell
   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
   ```
-- Ativar o Recurso de **Plataforma de Máquina Virtual** na tela de Recursos do Windows
+- Ativar o Recurso de **Plataforma de Máquina Virtual** na tela de Recursos do Windows:
   ```sehll
   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
   ```
-- Ativar o recurso de **Hyper-V** na tela de Recursos do Windows
+- Ativar o recurso de **Hyper-V** na tela de Recursos do Windows:
   ```shell
   dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
   ```
@@ -37,19 +47,19 @@ Executar no PowerShell como Administrador.
 - Fechar o Terminal e Abrir novamente
 - Iniciar o Terminal com o Arch Linux
 - No Terminal Arch:
-  ```shell
+  ```bash
   passwd
   ```
 - No Terminal Arch:
-  ```shell
+  ```bash
   echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
   ```
 - No Terminal Arch:
-  ```shell
+  ```bash
   useradd -m -G wheel -s /bin/bash {username}
   ```
 - No Terminal Arch:
-  ```shell
+  ```bash
   passwd {username}
   ```
 - No Terminal Arch: `exit`
@@ -61,28 +71,28 @@ Executar no PowerShell como Administrador.
 ### Inicializar e Atualizar o Arch
 
 - No Terminal Arch:
-  ```shell
+  ```bash
   sudo nano /etc/pacman.conf
   ```
 - No arquivo de configuração, procurar por **ParallelDownloads** e Alterar para 10 (no meu caso)
 - No Terminal Arch:
-  ```shell
+  ```bash
   sudo pacman-key --init
   ```
 - No Terminal Arch:
-  ```shell
+  ```bash
   sudo pacman-key --populate
   ```
 - No Terminal Arch:
-  ```shell
+  ```bash
   sudo pacman -Sy archlinux-keyring
   ```
 - No Terminal Arch:
-  ```shell
-  sudo pacman -Su
+  ```bash
+  sudo pacman -Syyuu
   ```
 - No Terminal Arch:
-  ```shell
+  ```bash
   sudo pacman -S git base-devel
   ```
 
@@ -91,51 +101,34 @@ Executar no PowerShell como Administrador.
 - Projeto YAY: <https://github.com/Jguer/yay>
 - No Terminal Arch: `cd /tmp`
 - No Terminal Arch:
-  ```shell
-  git clone https://aur.archlinux.org/yay-bin.git
+  ```bash
+  git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
   ```
-- No Terminal Arch: `cd yay-bin`
-- No Terminal Arch: `makepkg -si`
 
-### Instalando o Shell ZSH e configurando o Powerlevel10k
+### ZSH - History Database and Syntax
 
-- No Terminal Arch: `yay -S zsh`
-- Projeto Powerlevel10k: <https://github.com/romkatv/powerlevel10k>
-- Clique no link de **Installation**, depois no link **Arch Linux**
 - No Terminal Arch:
-  ```shell
-  yay -S --noconfirm zsh-theme-powerlevel10k-git
+  ```bash
+  yay -S --noconfirm zsh
   ```
 - No Terminal Arch:
-  ```shell
-  echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-  ```
-- No Terminal Arch:
-  ```shell
+  ```bash
   chsh -s /usr/bin/zsh
   ```
-- No Terminal Arch: `exit`
-- Projeto Powerlevel10k: <https://github.com/romkatv/powerlevel10k>
-- Clique no link de **Fonts**
-- Baixe e Instale as fonts **MesloLGS** no Windows
-- Abra o Terminal
-- Altere a Font nas configurações de Aparência do Terminal Arch
-- Abra o Terminal no Arch e Realizar a configuração do Powerlevel10k
-- Caso, ao finalizar essa configuração, queira refazer. No terminal Arch: `p10k configure`
+- Feche o Terminal e abra novamente com o novo Shell (deve aparecer o script para configuração inicial)
 
-### ZSH History Database
-
+#### Database
 - No Terminal Arch:
-  ```
+  ```bash
   yay -S --noconfirm sqlite3
   ```
 - No Terminal Arch:
-  ```shell
+  ```bash
   git clone https://github.com/larkery/zsh-histdb ~/.zsh/zsh-histdb
   ```
 - No Terminal Arch: `nano .zshrc`
 - Adicionar no arquivo:
-  ```shell
+  ```bash
   source ~/.zsh/zsh-histdb/sqlite-history.zsh
   ```
 - Adicionar no arquivo:
@@ -156,26 +149,95 @@ Executar no PowerShell como Administrador.
   ZSH_AUTOSUGGEST_STRATEGY=histdb_top
   ```
 
-### ZSH Auto Suggestions
+#### Auto Suggestions
 
 - No Terminal Arch:
-  ```shell
+  ```bash
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
   ```
 - No Terminal Arch: `nano .zshrc`
 - Adicionar no arquivo para iniciar com o ZSH:
-  ```shell
+  ```bash
   source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
   ```
 
-### ZSH Syntax High Lighting
+#### Syntax Highlighting
 
 - No Terminal Arch:
-  ```shell
+  ```bash
   git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
   ```
 - No Terminal Arch: `nano .zshrc`
 - Adicionar no arquivo:
-  ```shell
+  ```bash
   source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   ```
+ 
+ ---
+ 
+### Gerenciamento de Stacks (Node & Python)
+
+- **Node.js:** Instalado via **NVM** para gestão de versões.
+- **Python:** Instalado via **pyenv** para isolamento total.
+- Dependências de compilação para o Arch
+  ```bash
+  sudo pacman -S --needed base-devel openssl zlib bzip2 readline sqlite3 curl llvm libffi xz tk ncurses
+  ```
+- Instalação e Configuração Python
+  ```bash
+  pyenv install 3.12 && pyenv global 3.12
+  ```
+
+### Containerization: Podman (Rootless)
+Substituto do Docker Desktop, configurado para rodar sem `sudo`.
+
+- Instalação Podman e Fuse OverlayFS
+  ```bash
+  sudo pacman -S podman fuse-overlayfs
+  ```
+- Storage
+  ```bash
+  cat << 'EOF' > ~/.config/containers/storage.conf
+  [storage]
+  driver = "overlay"
+  graphroot = "/home/{username}/.local/share/containers/storage"
+
+  [storage.options.overlay]
+  mount_program = "/usr/bin/fuse-overlayfs"
+  EOF
+  ```
+
+---
+
+## ⚡ WSL2 Optimization `.wslconfig`
+Crie este arquivo em `%UserProfile%\.wslconfig` no Windows para tunar o ambiente:
+<pre><code>
+[wsl2]
+memory=8GB
+processors=6
+swap=4GB
+networkingMode=mirrored
+dnsTunneling=true
+localhostForwarding=true
+
+[experimental]
+autoMemoryReclaim=gradual
+sparseVhd=true
+</code></pre>
+
+---
+
+## 🎨 Terminal & Shell
+- **Shell:** ZSH com **Oh My Zsh!**
+- **Plugins:** `git`, `node`, `python`, `pyenv`, `podman`.
+- **Configuração Pyenv no `.zshrc`:**
+  <pre><code>
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+  </code></pre>
+
+---
+
+Criado por [Danilo Sanches](https://github.com/DSanches92).
