@@ -39,13 +39,13 @@ Adicione estes dois caminhos ao **Path do Sistema** (substitua `SeuUsuário`):
 
 ## 3. Setup no Arch Linux (WSL2)
 No terminal do Arch, instale os pacotes essenciais:
-```zsh
+```bash
 sudo pacman -Syu
 sudo pacman -S android-tools
 ```
 
 Adicione estas variáveis e aliases ao seu `~/.zshrc` ou `~/.bashrc`:
-```zsh
+```bash
 # Android SDK Paths (Interno WSL)
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -78,13 +78,13 @@ adb tcpip 5555
 ```
 
 - **Conectar (Arch Terminal) via alias:**
-```zsh
+```bash
 adb-up
 ```
 _Nota: Se aparecer "unauthorized" no terminal, aceite o popup no celular emulado._
 
 - **Desenvolver (Arch Terminal):**
-```zsh
+```bash
 npx react-native start
 npx react-native run-android
 ```

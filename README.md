@@ -15,27 +15,27 @@ Repositório dedicado à minha configuração personalizada de desenvolvimento n
 Para não instalar automáticamente o Ubuntu, assim, te permitindo instalar outra distro. Executar no PowerShell como Administrador.
 
 - Ativar o recusdo de **Subsistema do Windows para Linux** na tela de Recursos do Windows:
-  ```shell
+  ```powershell
   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
   ```
 - Ativar o Recurso de **Plataforma de Máquina Virtual** na tela de Recursos do Windows:
-  ```sehll
+  ```powershell
   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
   ```
 - Ativar o recurso de **Hyper-V** na tela de Recursos do Windows:
-  ```shell
+  ```powershell
   dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
   ```
 - Pós a ativação dos recursos, reinicie a máquina:
-  ```shell
+  ```powershell
   shutdown -r -t 0
   ```
 - Faça o update do WSL:
-  ```shell
+  ```powershell
   wsl --update
   ```
 - Configure como default a versão 2:
-  ```shell
+  ```powershell
   wsl --set-default-version 2
   ```
 
@@ -64,7 +64,7 @@ Para não instalar automáticamente o Ubuntu, assim, te permitindo instalar outr
   ```
 - No Terminal Arch: `exit`
 - Com o Terminal Windows na pasta C:\Arch, executar:
-  ```shell
+  ```powershell
   .\Arch.exe config --default-user {username}
   ```
 
