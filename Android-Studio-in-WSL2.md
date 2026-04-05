@@ -8,9 +8,9 @@ Este guia descreve a configuração completa para executar o emulador Android na
 
 Antes de iniciar, certifique-se de que a virtualização está ativa.
 
-[!CAUTION]
-A virtualização de hardware na BIOS/UEFI é obrigatória.
-Verifique em: **Gerenciador de Tarefas > Desempenho > CPU > Virtualização: Habilitado**.
+> [!CAUTION]
+> A virtualização de hardware na BIOS/UEFI é obrigatória.
+> Verifique em: **Gerenciador de Tarefas > Desempenho > CPU > Virtualização: Habilitado**.
 
 ### ✅ Recursos do Windows Ativos
 Ative as seguintes funcionalidades em "Ativar ou desativar recursos do Windows":
@@ -28,18 +28,18 @@ O segredo para a melhor performance é rodar o **Emulador no Windows** e a **Sta
 1. Baixe o [Android Studio](https://developer.android.com/studio).
 2. Durante o setup, instale o **Android SDK** e o **Android Virtual Device (AVD)**.
 
-[!TIP]
-Se o motor do emulador (AVD) estiver indisponível, instale manualmente o **Android Emulator Hypervisor Driver (AEHD)** via *SDK Manager > SDK Tools*.
+> [!TIP]
+> Se o motor do emulador (AVD) estiver indisponível, instale manualmente o **Android Emulator Hypervisor Driver (AEHD)** via *SDK Manager > SDK Tools*.
 
 ### B. Criação do Emulador (AVD)
 - No Device Manager, crie um novo dispositivo (ex: **Pixel 8**).
 - Utilize a **API 34 (Android 14)** e a imagem **x86_64** para máxima aceleração de hardware.
 
 ### C. Variáveis de Ambiente (PATH)
-Adicione estes caminhos ao **Path do Sistema** no Windows (substitua `<SeuUsuário>`):
+Adicione estes caminhos ao **Path do Sistema** no Windows (substitua `<seu_user>`):
 ```text
-C:\Users\<SeuUsuário>\AppData\Local\Android\Sdk\platform-tools
-C:\Users\<SeuUsuário>\AppData\Local\Android\Sdk\emulator
+C:\Users\<seu_user>\AppData\Local\Android\Sdk\platform-tools
+C:\Users\<seu_user>\AppData\Local\Android\Sdk\emulator
 ```
 
 ---
@@ -94,8 +94,8 @@ Siga esta sequência para iniciar seu desenvolvimento sem atritos:
     adb-up                           # Utiliza o alias criado acima
     ```
 
-[!IMPORTANT]
-Se o terminal exibir `unauthorized`, aceite a solicitação de depuração USB que aparecerá na tela do celular emulado.
+> [!IMPORTANT]
+> Se o terminal exibir `unauthorized`, aceite a solicitação de depuração USB que aparecerá na tela do celular emulado.
 
 ---
 

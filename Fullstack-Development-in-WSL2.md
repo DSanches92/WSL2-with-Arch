@@ -20,8 +20,8 @@ Guia definitivo para configurar um ambiente de desenvolvimento de alta performan
 ### 1️⃣ Ativação de Recursos do Windows
 Antes de instalar o Arch, precisamos garantir que o subsistema do Windows está pronto. Execute os comandos abaixo no **PowerShell como Administrador**.
 
-[!IMPORTANT]
-A ordem de execução é fundamental para evitar a instalação automática do Ubuntu padrão da Microsoft Store.
+> [!IMPORTANT]
+> A ordem de execução é fundamental para evitar a instalação automática do Ubuntu padrão da Microsoft Store.
 
 *   **Ativar Subsistema do Windows para Linux:**
     ```powershell
@@ -36,11 +36,11 @@ A ordem de execução é fundamental para evitar a instalação automática do U
     dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
     ```
 
-[!CAUTION]
-Após executar os comandos acima, você **DEVE** reiniciar seu computador para aplicar as alterações.
-```powershell
-shutdown -r -t 0
-```
+> [!CAUTION]
+> Após executar os comandos acima, você **DEVE** reiniciar seu computador para aplicar as alterações.
+> ```powershell
+> shutdown -r -t 0
+> ```
 
 *   **Pós-Reinicialização:** Atualize o kernel do WSL e defina a versão padrão:
     ```powershell
@@ -64,13 +64,13 @@ Utilizaremos a implementação customizada do [ArchWSL](https://github.com/yuk7/
     ```bash
     passwd                         # Define a senha do root
     echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
-    useradd -m -G wheel -s /bin/bash {seunome}
-    passwd {seunome}               # Define a senha do seu usuário
+    useradd -m -G wheel -s /bin/bash {seu_nome}
+    passwd {seu_nome}               # Define a senha do seu usuário
     exit                           # Sai do terminal do Arch
     ```
 5.  **Usuário Padrão:** No PowerShell do Windows (na pasta `C:\Arch`):
     ```powershell
-    .\Arch.exe config --default-user {seunome}
+    .\Arch.exe config --default-user {seu_nome}
     ```
 
 ---
@@ -116,8 +116,8 @@ yay -S --noconfirm zsh sqlite3
 chsh -s /usr/bin/zsh
 ```
 
-[!TIP]
-Ao abrir o ZSH pela primeira vez, escolha a opção padrão ou configure via assistente.
+> [!TIP]
+> Ao abrir o ZSH pela primeira vez, escolha a opção padrão ou configure via assistente.
 
 #### 🧠 Sugestões Inteligentes com Database (zsh-histdb)
 Diferente do histórico padrão, o `histdb` utiliza SQLite para sugerir comandos baseados no seu contexto atual.
