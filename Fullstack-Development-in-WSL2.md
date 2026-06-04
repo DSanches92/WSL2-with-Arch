@@ -181,7 +181,6 @@ mkdir -p ~/.config/containers
 cat << 'EOF' > ~/.config/containers/storage.conf
 [storage]
 driver = "overlay"
-graphroot = "/home/{seunome}/.local/share/containers/storage"
 
 [storage.options.overlay]
 mount_program = "/usr/bin/fuse-overlayfs"
@@ -200,7 +199,6 @@ processors=6         # Metade dos núcleos (ou todos, se preferir)
 swap=4GB
 networkingMode=mirrored
 dnsTunneling=true
-localhostForwarding=true
 
 [experimental]
 autoMemoryReclaim=gradual
