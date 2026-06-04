@@ -64,12 +64,27 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-# 🔌 Alias: Conectar ao emulador do Windows (ADB via TCP)
+# Alias: Conectar ao emulador do Windows (ADB via TCP)
 # Limpa conexões fantasmas e liga ao localhost:5555
-alias adb-up='adb disconnect && adb connect localhost:5555 && adb devices && echo "🚀 Ponte Android Ativa!"'
+adb-up() {
+  echo -e "\n\e[1;34m Iniciando conexão SDK Android in WSL...\e[0m\n"
 
-# 🛑 Alias: Desconectar (Graceful Shutdown)
-alias adb-down='adb disconnect localhost:5555 && adb kill-server && echo "😴 Ponte Android Desconectada!"'
+  adb disconnect && \
+    adb connect localhost:5555 && \
+      adb devices
+
+  echo -e "\n\e[1;32m Ponte Android Ativa!\e[0m\n"
+}
+
+# Alias: Desconectar (Graceful Shutdown)
+adb-down() {
+  echo -e "\n\e[1;34m Finalizando conexão SDK Android in WSL...\e[0m\n"
+
+  adb disconnect localhost:5555 && \
+    adb kill-server
+
+  echo "\n\e[1;32m Ponte Android Desconectada!\e[0m\n"
+}
 ```
 
 ---
