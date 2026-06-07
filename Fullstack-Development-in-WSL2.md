@@ -222,7 +222,21 @@ Atualize as configurações com `source ~/.zshrc`.
 **Validação:**
 ```bash
 go version
-go run -e 'package main; import "fmt"; func main() { fmt.Println("Go ok!") }'
+
+mkdir -p ~/go/hello
+cd ~/go/hello
+
+cat > main.go << 'EOF'
+package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("GO OK!")
+}
+EOF
+
+go run main.go
 ```
 
 ---
