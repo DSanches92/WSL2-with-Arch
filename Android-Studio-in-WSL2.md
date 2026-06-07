@@ -247,7 +247,7 @@ Para economizar bateria e CPU ao terminar o trabalho:
 
 | Ferramenta              | Versão                 |
 |-------------------------|------------------------|
-| Android NDK             | r27b (`27.1.12297006`) |
+| Android NDK             | r27d (`27.3.13750724`) |
 | Android SDK Build-Tools | 36.0.0                 |
 | Android SDK Platform    | API 36                 |
 | JDK                     | OpenJDK 17             |
