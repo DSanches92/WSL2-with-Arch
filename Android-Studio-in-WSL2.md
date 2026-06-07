@@ -131,16 +131,16 @@ ln -sf /mnt/c/Users/<seu_user>/AppData/Local/Android/Sdk/licenses ~/.android-sdk
 
 ### Instala o NDK Linux nativo
 
-O projeto usa NDK `27.1.12297006`, que corresponde ao release `r27b`:
+O projeto usa NDK `27.3.13750724`, que corresponde ao release `r27d`:
 
 ```bash
 cd ~
-wget https://dl.google.com/android/repository/android-ndk-r27b-linux.zip
-unzip android-ndk-r27b-linux.zip
-mv android-ndk-r27b ~/.android-sdk/ndk/27.1.12297006
+wget https://dl.google.com/android/repository/android-ndk-r27d-linux.zip
+unzip android-ndk-r27d-linux.zip
+mv android-ndk-r27d-linux ~/.android-sdk/ndk/27.3.13750724
 
 # Confirma que é binário Linux (deve mostrar "ELF 64-bit")
-file ~/android-sdk/ndk/27.1.12297006/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-18
+file ~/android-sdk/ndk/27.3.13750724/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-18
 ```
 
 ### ⚙️ Configuração de Shell (`~/.zshrc`)
