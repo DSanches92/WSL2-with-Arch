@@ -213,10 +213,8 @@ sudo pacman -S go
 
 **Configuração `.zshrc`:**
 ```bash
-export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin:$GOBIN
 ```
 
 Atualize as configurações com `source ~/.zshrc`.
