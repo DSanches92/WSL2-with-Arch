@@ -65,9 +65,14 @@ Obrigado / Thank You [yuk7](https://github.com/yuk7) 💕
   ```
 - **Configuração de Usuário:**
   No terminal do Arch que se abriu, vamos configurar o roteamento de permissões:
+
+  > [!TIP]
+  > Certifique-se de que o arquivo principal `/etc/sudoers` inclua a diretiva `#includedir /etc/sudoers.d`. Geralmente, isso já é o padrão no Arch Linux.
+  > Para evitar erros de sintaxe ao configurar permissões, considere usar `EDITOR=nano visudo -f /etc/sudoers.d/wheel`.
+
   ```bash
   passwd
-  echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
+  echo "%wheel ALL=(ALL) ALL" | tee /etc/sudoers.d/wheel
   useradd -m -G wheel -s /bin/bash {seu_nome}
   passwd {seu_nome}
   exit
@@ -87,7 +92,7 @@ Agora vamos preparar o Arch Linux para ser o cavalo de batalha do seu desenvolvi
   ```bash
   sudo nano /etc/pacman.conf
   ```
-  *Altere `ParallelDownloads = 5` para `10` (ou de acordo com sua conexão).*
+  *Descomente a linha `ParallelDownloads` (remova o símbolo `#` do início dela) e altere de `5` para `10` (ou de acordo com sua conexão).*
 
 - **Sincronizar Chaves e Atualizar:**
   ```bash
@@ -95,48 +100,62 @@ Agora vamos preparar o Arch Linux para ser o cavalo de batalha do seu desenvolvi
   sudo pacman-key --populate
   sudo pacman -Sy archlinux-keyring
   sudo pacman -Syyuu
-  sudo pacman -S git base-devel openssl curl wget
+  sudo pacman -S --needed git base-devel openssl curl wget
   ```
 
 ---
 
-### 📦 Gerenciamento de Pacotes AUR (YAY)
+### 📦 Gerenciamento de Pacotes AUR (PARU)
 
-O [YAY](https://github.com/Jguer/yay) é essencial para acessar o imenso repositório comunitário do Arch, mas é opcional para o que faremos aqui.
+O [PARU](https://github.com/Morganamilo/paru) é um AUR helper moderno e eficiente, escrito em Rust, essencial para acessar o imenso repositório comunitário do Arch de forma simplificada.
 
 ```bash
 cd /tmp
-git clone https://aur.archlinux.org/yay-bin.git
-cd yay-bin
+git clone https://aur.archlinux.org/paru-bin.git
+cd paru-bin
 makepkg -si
 ```
 
 ---
 
-### 🐚 Terminal & Shell (ZSH)
+### 🐚 Terminal & Shell (ZSH + Oh My Zsh)
 
-Um shell produtivo economiza horas de digitação através de sugestões inteligentes.
+Um shell produtivo economiza horas de digitação através de sugestões inteligentes, atalhos rápidos e destaque de sintaxe.
 
-**Instalação:**
+**1. Instalar o ZSH e Dependências:**
 ```bash
 sudo pacman -S zsh sqlite3
 chsh -s /usr/bin/zsh
 ```
 
-> [!TIP]
-> Ao abrir o ZSH pela primeira vez, escolha a opção padrão ou configure via assistente.
-
-**Plugins de produtividade:**
+**2. Instalar o Oh My Zsh!:**
 ```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/zsh-syntax-highlighting
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-**Configuração `.zshrc`:**
+**3. Instalar Plugins de Produtividade (na pasta customizada do OMZ):**
 ```bash
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
 
+**4. Configuração do `.zshrc`:**
+Abra o arquivo de configuração com o nano:
+```bash
+nano ~/.zshrc
+```
+
+Garanta que a linha `plugins=(...)` contenha os plugins desejados:
+```bash
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+```
+
+E configure o histórico padrão no final do arquivo:
+```bash
 # Histórico no ZSH
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -152,12 +171,10 @@ Diferente do histórico padrão, o `histdb` utiliza SQLite para sugerir comandos
 git clone https://github.com/larkery/zsh-histdb ~/.zsh/zsh-histdb
 ```
  
-**Configuração `.zshrc` (substitui a padrão acima):**
+**Configuração `.zshrc` (adicione no final do arquivo):**
 ```bash
 source ~/.zsh/zsh-histdb/sqlite-history.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
- 
+
 # Estratégia HistDB para Auto-Suggestions
 _zsh_autosuggest_strategy_histdb_top() {
     local query="
@@ -179,7 +196,35 @@ ZSH_AUTOSUGGEST_STRATEGY=histdb_top
 
 #### Node.js
 
-Utilize o `nvm` para alternar entre versões de runtime facilmente.
+Utilize o `nvm` (Node Version Manager) para gerenciar e alternar facilmente entre múltiplas versões do Node.js.
+
+> [!IMPORTANT]
+> **Sempre utilize o guia oficial para obter o script de instalação mais atualizado!**
+> Para garantir que você está instalando a versão mais recente e segura do NVM, consulte o [Guia Oficial de Download do Node.js (via Gerenciador de Pacotes)](https://nodejs.org/en/download/package-manager) ou acesse diretamente o repositório oficial do [NVM no GitHub](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+**1. Instalar o NVM:**
+Acesse o link acima e execute o comando de instalação atualizado. Como referência, o comando segue este formato:
+```bash
+# IMPORTANTE: Verifique no site oficial do Node.js/NVM a versão mais recente antes de rodar!
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+```
+
+**2. Configuração `.zshrc`:**
+Geralmente o script de instalação adiciona as linhas abaixo automaticamente. Caso não tenham sido adicionadas, abra o `~/.zshrc` e adicione ao final:
+```bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # Carrega o NVM
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # Carrega completions do NVM
+```
+
+**3. Instalar a Versão LTS do Node.js:**
+Após carregar o shell atualizado (`source ~/.zshrc`), instale a versão LTS recomendada:
+```bash
+nvm install --lts
+nvm use --lts
+node -v # Validação da versão ativa
+npm -v  # Validação do gerenciador de pacotes
+```
 
 #### Python
 
@@ -187,7 +232,7 @@ Utilize o `pyenv` para isolamento total de versões e pacotes.
 
 **Dependências de Build:**
 ```bash
-sudo pacman -S zlib bzip2 readline llvm libffi xz tk ncurses
+paru -S pyenv zlib bzip2 readline llvm libffi xz tk ncurses
 ```
 
 **Instalação:**
@@ -205,16 +250,17 @@ eval "$(pyenv init -)"
 
 #### GO
 
-Utilize `pacman` para instalar o Golang diretamente:
+Utilize `paru` ou `podman` para instalar o Golang diretamente:
 
 ```bash
-sudo pacman -S go
+paru -S go
 ```
 
 **Configuração `.zshrc`:**
 ```bash
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
 ```
 
 Atualize as configurações com `source ~/.zshrc`.
@@ -246,7 +292,7 @@ go run main.go
 O Podman é o substituto moderno do Docker Desktop, funcionando de forma nativa e segura no Arch Linux sem necessidade de `sudo`.
 
 ```bash
-sudo pacman -S podman fuse-overlayfs
+paru -S podman fuse-overlayfs
 # Para uso com Podman no WSL 2, selecione: 1) crun (padrão e recomendado)
 ```
 
@@ -263,8 +309,7 @@ sudo usermod --add-subgids 100000-165535 {seu_nome}
 ```bash
 mkdir -p ~/.config/containers
 cat > ~/.config/containers/registries.conf << 'EOF'
-[registries.search]
-registries = ["docker.io", "ghcr.io", "quay.io"]
+unqualified-search-registries = ["docker.io", "ghcr.io", "quay.io"]
 EOF
 ```
 
@@ -281,7 +326,12 @@ EOF
 
 **4. Ajustando `Shared Mount "/"`**
 
-Verifique seu `sudo nano /etc/wsl.conf` e confirme o conteúdo abaixo:
+O arquivo de configuração `/etc/wsl.conf` gerencia as configurações internas da sua distribuição do WSL. Crie ou edite este arquivo utilizando:
+```bash
+sudo nano /etc/wsl.conf
+```
+
+Confirme se o conteúdo do arquivo está exatamente como abaixo:
 
 ```ini
 [boot]
@@ -338,7 +388,14 @@ podman run --rm alpine echo "rootless ok"
 
 ## ⚡ Otimização do WSL2 (`.wslconfig`)
 
-No Windows, crie o arquivo `%UserProfile%\.wslconfig` para gerenciar os recursos de hardware do WSL:
+No **Windows Host**, crie ou edite o arquivo `.wslconfig` no diretório do seu usuário (geralmente `C:\Users\{SeuUsuario}\.wslconfig` ou `%UserProfile%\.wslconfig`) para gerenciar as configurações globais de hardware de todas as distribuições WSL2:
+
+Abra o PowerShell do Windows e digite o seguinte comando para abrir/criar o arquivo rapidamente no Bloco de Notas:
+```powershell
+notepad $env:USERPROFILE\.wslconfig
+```
+
+Insira a configuração de alta performance abaixo:
 
 ```ini
 [wsl2]
@@ -357,8 +414,20 @@ sparseVhd=true
 
 ## 🎨 Personalização Final
 
-Para uma experiência premium, recomendo o uso do **Oh My Zsh!** com os seguintes plugins no seu `.zshrc`:
-- `git`, `node`, `python`, `pyenv`, `podman`, `golang`.
+Agora que você tem o **Oh My Zsh!** configurado, atualize a lista de plugins no seu `~/.zshrc` para carregar completações automáticas de atalhos e binários para todas as suas stacks instaladas:
+
+```bash
+plugins=(
+  git
+  node
+  python
+  pyenv
+  podman
+  golang
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+```
 
 **Antigravity com WSL 2:**
 ```bash
@@ -387,6 +456,13 @@ podman-nuke() {
 ```
 
 **Scan com o Snyk CLI:**
+
+> [!NOTE]
+> Para utilizar esta função, você precisa instalar o Snyk CLI globalmente através do npm:
+> ```bash
+> npm install -g snyk
+> ```
+
 ```bash
 snyk-scan() {
   echo -e "\n\e[1;34m Iniciando Varredura Completa do Snyk...\e[0m\n"
