@@ -103,6 +103,14 @@ Agora vamos preparar o Arch Linux para ser o cavalo de batalha do seu desenvolvi
   sudo pacman -S --needed git base-devel openssl curl wget
   ```
 
+- **Configuração Global do Git:**
+  Configure sua identidade global no Git para assinar seus commits corretamente:
+  ```bash
+  git config --global user.email "silva.danilosanches@gmail.com"
+  git config --global user.name "Danilo Sanches da Silva"
+  git config --global core.editor "nano"
+  ```
+
 ---
 
 ### 📦 Gerenciamento de Pacotes AUR (PARU)
