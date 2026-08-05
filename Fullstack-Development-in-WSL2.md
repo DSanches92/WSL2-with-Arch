@@ -106,8 +106,8 @@ Agora vamos preparar o Arch Linux para ser o cavalo de batalha do seu desenvolvi
 - **Configuração Global do Git:**
   Configure sua identidade global no Git para assinar seus commits corretamente:
   ```bash
-  git config --global user.email "silva.danilosanches@gmail.com"
-  git config --global user.name "Danilo Sanches da Silva"
+  git config --global user.email "{seu_email}"
+  git config --global user.name "{seu_nome_completo}"
   git config --global core.editor "nano"
   ```
 
@@ -214,7 +214,7 @@ Utilize o `nvm` (Node Version Manager) para gerenciar e alternar facilmente entr
 Acesse o link acima e execute o comando de instalação atualizado. Como referência, o comando segue este formato:
 ```bash
 # IMPORTANTE: Verifique no site oficial do Node.js/NVM a versão mais recente antes de rodar!
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
 ```
 
 **2. Configuração `.zshrc`:**
@@ -438,6 +438,10 @@ plugins=(
 ```
 
 **Antigravity com WSL 2:**
+
+> [!NOTE]
+> Em maio de 2026 a Google reestruturou o Antigravity em quatro produtos separados (Antigravity 2.0, Antigravity IDE, SDK e CLI), e o suporte remoto ao WSL já teve quebras relatadas entre versões. Vale confirmar se o caminho `AppData\Local\Programs\Antigravity IDE\bin\antigravity-ide` abaixo ainda bate com a sua instalação antes de usar a função.
+
 ```bash
 antigravity() {
   echo -e "\n\e[1;34m Iniciando Antigravity IDE...\e[0m\n"

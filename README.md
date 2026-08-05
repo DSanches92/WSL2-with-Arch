@@ -15,11 +15,11 @@ Guia de configuração do zero, incluindo:
 - Configuração de **ZSH**, **NVM**, **Pyenv** e **Podman (Rootless)**.
 - Otimizações de hardware via `.wslconfig`.
 
-### 2. 📱 [Android Studio Emulator](./Android-Studio-in-WSL2.md)
-Setup especializado para desenvolvimento mobile, cobrindo:
-- Virtualização e SDK Manager.
-- Configuração de ponte (ADB via TCP) entre Windows e WSL2.
-- Fluxo de trabalho otimizado para React Native, Flutter e Kotlin.
+### 2. 📱 [Android SDK Nativo](./Android-SDK-Native-WSL2.md)
+Setup especializado para desenvolvimento mobile 100% nativo (sem Android Studio), cobrindo:
+- Instalação do JDK, Android SDK (cmdline-tools) e NDK direto no Arch Linux.
+- Passthrough de dispositivo físico via USB (usbipd-win) — sem emulador.
+- Fluxo de trabalho otimizado para React Native, Expo e Flutter.
 
 ---
 
