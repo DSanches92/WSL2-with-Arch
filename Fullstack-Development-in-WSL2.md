@@ -143,8 +143,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 **3. Instalar Plugins de Produtividade (na pasta customizada do OMZ):**
 ```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
 
 **4. Configuração do `.zshrc`:**
@@ -176,23 +176,23 @@ Diferente do histórico padrão, o `histdb` utiliza SQLite para sugerir comandos
  
 **Instalação adicional:**
 ```bash
-git clone https://github.com/larkery/zsh-histdb ~/.zsh/zsh-histdb
+git clone https://github.com/larkery/zsh-histdb ~/.oh-my-zsh/custom/plugins/zsh-histdb
 ```
  
 **Configuração `.zshrc` (adicione no final do arquivo):**
 ```bash
-source ~/.zsh/zsh-histdb/sqlite-history.zsh
+source ~/.oh-my-zsh/custom/plugins/zsh-histdb/sqlite-history.zsh
 
 # Estratégia HistDB para Auto-Suggestions
 _zsh_autosuggest_strategy_histdb_top() {
     local query="
-        select commands.argv from history
-        left join commands on history.command_id = commands.rowid
-        left join places on history.place_id = places.rowid
-        where commands.argv LIKE '$(sql_escape $1)%'
-        group by commands.argv, places.dir
-        order by places.dir != '$(sql_escape $PWD)', count(*) desc
-        limit 1 "
+      select commands.argv from history
+      left join commands on history.command_id = commands.rowid
+      left join places on history.place_id = places.rowid
+      where commands.argv LIKE '$(sql_escape $1)%'
+      group by commands.argv, places.dir
+      order by places.dir != '$(sql_escape $PWD)', count(*) desc, max(history.start_time) desc
+      limit 1 "
     suggestion=$(_histdb_query "$query")
 }
 ZSH_AUTOSUGGEST_STRATEGY=histdb_top
