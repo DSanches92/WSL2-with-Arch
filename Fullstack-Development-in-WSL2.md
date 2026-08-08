@@ -119,8 +119,8 @@ O [PARU](https://github.com/Morganamilo/paru) é um AUR helper moderno e eficien
 
 ```bash
 cd /tmp
-git clone https://aur.archlinux.org/paru-bin.git
-cd paru-bin
+git clone https://aur.archlinux.org/paru.git
+cd paru
 makepkg -si
 ```
 
